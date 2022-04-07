@@ -1,0 +1,14 @@
+GET localhost:3000
+
+POST localhost:3000/book
+Content-Type: application/json
+
+{
+    "ISBN": ,
+    "Title": ,
+    "author": ,
+    "published-date": ,
+    "publisher": ,
+    "numofpages": ,
+
+}

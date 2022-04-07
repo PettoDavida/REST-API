@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "node index.js index.html"
+    "start": "node index.js"
   },
   "author": "Maximilian Widman",
   "license": "ISC",
