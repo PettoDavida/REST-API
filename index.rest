@@ -1,15 +1,29 @@
-GET localhost:3000
+GET http://localhost:3000/
 
 ###
 
-POST http://localhost:3000/book
+POST http://localhost:3000/
 Content-Type: application/json
 
 {
-    "isbn": 9781593275846,
     "title": "Eloquent JavaScript, Second Edition",
     "author": "Marijn Haverbeke",
-    "publish_date": "2014-12-14",
+    "publisher": "No Starch Press",
+    "numOfPages": 472
+}
+
+###
+
+DELETE http://localhost:3000/2
+
+###
+
+Put http://localhost:3000/1
+Content-Type: application/json
+
+{
+    "title": "test",
+    "author": "Marijn Haverbeke",
     "publisher": "No Starch Press",
     "numOfPages": 472
 }

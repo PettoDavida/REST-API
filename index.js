@@ -1,41 +1,71 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 
 const app = express();
 const port = 3000;
 
 let books = [
     {
-        "isbn": 9781449331818,
+        "id": 1,
         "title": "Learning JavaScript Design Patterns",
         "author": "Addy Osmani",
-        "publish_date": "2012-07-01",
         "publisher": "O'Reilly Media",
         "numOfPages": 254
     },
     {
-        "isbn": 9781449365035,
+        "id": 2,
         "title": "Speaking JavaScript",
         "author": "Axel Rauschmayer",
-        "publish_date": "2014-02-01",
         "publisher": "O'Reilly Media",
         "numOfPages": 460
     }
 ];
 
-app.use(cors());
+app.use(express.json());
 
-app.use(bodyParser.urlencoded({ extended: false}));
-app.use(bodyParser.json());
 
-app.post('/book', (req, res) => {
-    const book = req.body
+app.get('/', (req, res) => {
+    res.send(books)
+})
+
+app.post('/', (req, res) => {
+    const book = {
+        "id": books[books.length-1].id + 1,
+        "title": req.body.title,
+        "author": req.body.author,
+        "publisher": req.body.publisher,
+        "numOfPages": req.body.numOfPages
+    }
 
     books.push(book)
-    console.log(books);
 
     res.send('Book is added to the database')
+})
+
+app.delete('/:id', (req, res) => {
+    const id = req.params.id
+    books= books.filter(i => {
+        if (i.id !== parseInt(id)) {
+            return true
+        }
+        return false
+    })
+
+    res.send(books)
+})
+
+app.put('/:id', (req, res) => {
+    
+    const id = req.params.id
+    const editedBook = req.body
+    for (let i = 0; i < books.length; i++) {
+        let book = books[i];
+        if (book.id === id){
+            books[i] = editedBook
+        }
+        
+    }
+
+    res.send(books)
 })
 
 app.listen(port, 'localhost', () => console.log(`Hello world app listening on port ${port}!`))
