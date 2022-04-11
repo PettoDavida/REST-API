@@ -23,7 +23,7 @@ let books = [
 app.use(express.json());
 
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
     res.send(books)
 })
 
@@ -42,15 +42,26 @@ app.post('/', (req, res) => {
 })
 
 app.delete('/:id', (req, res) => {
-    const id = req.params.id
-    books= books.filter(i => {
-        if (i.id !== parseInt(id)) {
-            return true
-        }
-        return false
-    })
 
-    res.send(books)
+    const id = req.params.id
+    let found = false
+    let index = 0
+
+    for (let i = 0; i < books.length; i++) {
+        if (books[i].id === parseInt(id)) {
+            found = true
+            index = i
+            break
+        }
+    }
+
+    if (found) {
+        books.splice(index, 1)
+        res.status(200).json({ Success: "Book Removed" })
+    }else{
+        res.status(404).json({ Error: "Book does not exist" })
+    }
+
 })
 
 app.put('/:id', (req, res) => {
@@ -59,7 +70,8 @@ app.put('/:id', (req, res) => {
     const editedBook = req.body
     for (let i = 0; i < books.length; i++) {
         let book = books[i];
-        if (book.id === id){
+        if (book.id === parseInt(id)){
+            editedBook['id'] = book.id
             books[i] = editedBook
         }
         
