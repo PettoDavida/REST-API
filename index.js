@@ -68,16 +68,22 @@ app.put('/:id', (req, res) => {
     
     const id = req.params.id
     const editedBook = req.body
+    let edited = false
     for (let i = 0; i < books.length; i++) {
         let book = books[i];
         if (book.id === parseInt(id)){
             editedBook['id'] = book.id
             books[i] = editedBook
+            edited = true
         }
         
     }
 
-    res.send(books)
+    if (edited) {
+        res.status(200).json({ Success: "Book Edited" })
+    }else{
+        res.status(404).json({ Error: "Book does not exist" })
+    }
 })
 
 app.listen(port, 'localhost', () => console.log(`Hello world app listening on port ${port}!`))
