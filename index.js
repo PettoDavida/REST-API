@@ -24,7 +24,12 @@ app.use(express.json());
 
 
 app.get('/', (_req, res) => {
-    res.send(books)
+    if (books === undefined) {
+        res.status(500).json({Error: "Books does not exist"})
+    } else {
+        res.send(books)
+    }
+    
 })
 
 app.post('/', (req, res) => {
