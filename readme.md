@@ -38,7 +38,7 @@ npm i
 För att starta servern kör
 
 ```
-node start
+npm start
 ```
 
 Skapad av Maximilian Widman FED21G
