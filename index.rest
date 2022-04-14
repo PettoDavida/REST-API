@@ -1,6 +1,7 @@
+### Gets all books in array
 GET http://localhost:3000/
 
-###
+### Adds a new book with id based on the last item in the array
 
 POST http://localhost:3000/
 Content-Type: application/json
@@ -12,11 +13,11 @@ Content-Type: application/json
     "numOfPages": 472
 }
 
-###
+### Deletes book with id 2
 
 DELETE http://localhost:3000/2
 
-###
+### Edits book with id 1
 
 Put http://localhost:3000/1
 Content-Type: application/json
